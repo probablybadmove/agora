@@ -31,36 +31,30 @@ export function Button({
   style,
 }: Props) {
   const theme = useTheme();
-  const pad = size === 'lg' ? Spacing.three : size === 'sm' ? Spacing.two : 10;
-  const padH = size === 'lg' ? Spacing.four : Spacing.three;
+  const padV = size === 'lg' ? 13 : size === 'sm' ? 7 : 10;
+  const padH = size === 'lg' ? Spacing.four : size === 'sm' ? Spacing.three : Spacing.three;
 
   const bg =
-    variant === 'primary'
-      ? theme.accent
-      : variant === 'secondary'
-        ? theme.backgroundElement
-        : 'transparent';
-  const fg = variant === 'primary' ? theme.accentText : theme.text;
-  const border = variant === 'secondary' ? theme.border : 'transparent';
+    variant === 'primary' ? theme.text : variant === 'secondary' ? 'transparent' : 'transparent';
+  const fg = variant === 'primary' ? theme.background : theme.text;
+  const border = variant === 'secondary' ? theme.borderStrong : 'transparent';
 
-  const inner = (pressed: boolean) => (
+  const inner = (pressed: boolean, hovered?: boolean) => (
     <View
       style={[
         styles.base,
         {
-          backgroundColor: bg,
-          borderColor: border,
-          borderWidth: variant === 'secondary' ? StyleSheet.hairlineWidth * 2 : 0,
-          paddingVertical: pad,
+          backgroundColor: variant === 'ghost' && hovered ? theme.backgroundElement : bg,
+          borderColor: variant === 'secondary' && hovered ? theme.text : border,
+          borderWidth: variant === 'secondary' ? 1 : 0,
+          paddingVertical: padV,
           paddingHorizontal: padH,
-          opacity: pressed ? 0.82 : 1,
+          opacity: pressed ? 0.78 : 1,
         },
         style,
       ]}>
       {icon}
-      <ThemedText
-        type={size === 'sm' ? 'smallBold' : 'default'}
-        style={[styles.label, { color: fg }]}>
+      <ThemedText type={size === 'sm' ? 'smallBold' : 'default'} style={[styles.label, { color: fg }]}>
         {label}
       </ThemedText>
       {iconRight}
@@ -70,14 +64,16 @@ export function Button({
   if (href) {
     return (
       <Link href={href} asChild>
-        <Pressable accessibilityRole="link">{({ pressed }) => inner(pressed)}</Pressable>
+        <Pressable accessibilityRole="link">
+          {({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => inner(pressed, hovered)}
+        </Pressable>
       </Link>
     );
   }
 
   return (
     <Pressable accessibilityRole="button" onPress={onPress}>
-      {({ pressed }) => inner(pressed)}
+      {({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => inner(pressed, hovered)}
     </Pressable>
   );
 }
@@ -88,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: Spacing.two,
-    borderRadius: Radius.pill,
+    borderRadius: Radius.md,
   },
   label: { fontWeight: '600' },
 });

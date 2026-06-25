@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Page } from '@/components/page';
 import { PluginGrid } from '@/components/plugin-grid';
@@ -8,7 +8,6 @@ import { SearchBar } from '@/components/search-bar';
 import { Section } from '@/components/section';
 import { Seo } from '@/components/seo';
 import { ThemedText } from '@/components/themed-text';
-import { withAlpha } from '@/components/pill';
 import { Radius, Spacing } from '@/constants/theme';
 import { getCategories, searchPlugins } from '@/data/catalog';
 import { useCatalog } from '@/hooks/use-catalog';
@@ -33,23 +32,18 @@ export default function BrowseScreen() {
         description="Search every Claude Code plugin in Agora by name or category."
         path="/browse"
       />
-      <Section eyebrow="The catalog" title="Every plugin in the square">
+      <Section title="The catalog" rule={false}>
         <SearchBar value={query} onChange={setQuery} />
 
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.chips}>
-          <FilterChip
-            label="All"
-            active={!category}
-            onPress={() => setCategory(undefined)}
-          />
+          <FilterChip label="All" active={!category} onPress={() => setCategory(undefined)} />
           {categories.map((c) => (
             <FilterChip
               key={c.slug}
-              label={`${c.glyph} ${c.name}`}
-              color={c.color}
+              label={c.name}
               active={category === c.slug}
               onPress={() => setCategory(category === c.slug ? undefined : c.slug)}
             />
@@ -71,31 +65,34 @@ export default function BrowseScreen() {
 function FilterChip({
   label,
   active,
-  color,
   onPress,
 }: {
   label: string;
   active: boolean;
-  color?: string;
   onPress: () => void;
 }) {
   const theme = useTheme();
-  const tint = color ?? theme.accent;
   return (
     <Pressable onPress={onPress} accessibilityRole="button">
-      <View
-        style={[
-          styles.chip,
-          active
-            ? { backgroundColor: withAlpha(tint, 0.18), borderColor: withAlpha(tint, 0.5) }
-            : { backgroundColor: theme.backgroundElement, borderColor: theme.border },
-        ]}>
-        <ThemedText
-          type="small"
-          style={{ color: active ? theme.text : theme.textSecondary, fontWeight: active ? '600' : '500' }}>
-          {label}
-        </ThemedText>
-      </View>
+      {({ hovered }: { pressed: boolean; hovered?: boolean }) => (
+        <View
+          style={[
+            styles.chip,
+            {
+              backgroundColor: active ? theme.text : 'transparent',
+              borderColor: active ? theme.text : hovered ? theme.borderStrong : theme.border,
+            },
+          ]}>
+          <ThemedText
+            type="small"
+            style={{
+              color: active ? theme.background : theme.textSecondary,
+              fontWeight: active ? '600' : '500',
+            }}>
+            {label}
+          </ThemedText>
+        </View>
+      )}
     </Pressable>
   );
 }
@@ -103,9 +100,9 @@ function FilterChip({
 const styles = StyleSheet.create({
   chips: { gap: Spacing.two, paddingVertical: Spacing.one, paddingRight: Spacing.three },
   chip: {
-    paddingVertical: Spacing.one + 2,
+    paddingVertical: 6,
     paddingHorizontal: Spacing.three,
-    borderRadius: Radius.pill,
-    borderWidth: StyleSheet.hairlineWidth * 2,
+    borderRadius: Radius.md,
+    borderWidth: 1,
   },
 });

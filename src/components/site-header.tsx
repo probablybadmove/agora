@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AgoraMark } from '@/components/agora-mark';
 import { Button } from '@/components/button';
 import { ExternalLink } from '@/components/external-link';
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { MARKETPLACE } from '@/data/catalog';
@@ -25,18 +26,21 @@ export function SiteHeader() {
         {
           backgroundColor: theme.background,
           borderBottomColor: theme.border,
-          paddingTop: insets.top + Spacing.two,
+          paddingTop: insets.top + 10,
         },
       ]}>
       <View style={styles.inner}>
         <Link href="/" asChild>
           <Pressable accessibilityRole="link" style={styles.brand}>
-            <AgoraMark size={30} color={theme.accent} />
+            <AgoraMark size={26} color={theme.accent} />
             <ThemedText type="heading" family="serif" style={styles.wordmark}>
               Agora
             </ThemedText>
             {!compact ? (
-              <ThemedText type="eyebrow" themeColor="textSecondary" style={styles.brandTag}>
+              <View style={[styles.divider, { backgroundColor: theme.borderStrong }]} />
+            ) : null}
+            {!compact ? (
+              <ThemedText type="eyebrow" themeColor="textSecondary">
                 marketplace
               </ThemedText>
             ) : null}
@@ -46,15 +50,11 @@ export function SiteHeader() {
         <View style={styles.nav}>
           <NavLink href="/browse" label="Browse" />
           <NavLink href="/docs" label="Docs" />
-          {!compact ? (
-            <ExternalLink href={GITHUB_URL} asChild>
-              <Pressable accessibilityRole="link">
-                <ThemedText type="default" themeColor="textSecondary">
-                  GitHub
-                </ThemedText>
-              </Pressable>
-            </ExternalLink>
-          ) : null}
+          <ExternalLink href={GITHUB_URL} asChild>
+            <Pressable accessibilityRole="link" style={styles.iconLink} aria-label="GitHub">
+              <Icon name="github" size={19} color={theme.textSecondary} />
+            </Pressable>
+          </ExternalLink>
           <Button label={compact ? 'Add' : 'Add to Claude Code'} href="/docs" size="sm" />
         </View>
       </View>
@@ -86,10 +86,9 @@ function NavLink({ href, label }: { href: '/browse' | '/docs'; label: string }) 
 
 const styles = StyleSheet.create({
   bar: {
-    borderBottomWidth: StyleSheet.hairlineWidth * 2,
-    paddingBottom: Spacing.two,
+    borderBottomWidth: 1,
+    paddingBottom: 10,
     paddingHorizontal: Spacing.three,
-    // keep header pinned on web while content scrolls
     position: 'sticky',
     top: 0,
     zIndex: 50,
@@ -105,6 +104,7 @@ const styles = StyleSheet.create({
   },
   brand: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   wordmark: { letterSpacing: 0.2 },
-  brandTag: { marginLeft: 2, marginTop: 6 },
+  divider: { width: 1, height: 16, marginHorizontal: 2 },
   nav: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  iconLink: { padding: 2 },
 });

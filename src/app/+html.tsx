@@ -19,7 +19,7 @@ export default function Root({ children }: PropsWithChildren) {
           name="description"
           content="Agora is the public square for Claude Code plugins. Browse skills and subagents, then install them in one command."
         />
-        <meta name="theme-color" content="#FBF7EF" />
+        <meta name="theme-color" content="#FBFAF6" />
 
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
@@ -55,9 +55,7 @@ export default function Root({ children }: PropsWithChildren) {
 }
 
 const responsiveBackground = `
-body { background-color: #FBF7EF; }
-@media (prefers-color-scheme: dark) {
-  body { background-color: #16140F; }
-}
-::selection { background-color: rgba(194, 85, 47, 0.25); }
+:root { color-scheme: light; }
+body { background-color: #FBFAF6; }
+::selection { background-color: rgba(168, 58, 36, 0.18); }
 `;

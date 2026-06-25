@@ -1,13 +1,13 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import { ThemedText } from '@/components/themed-text';
+import { Icon } from '@/components/icon';
 import { Fonts, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export function SearchBar({
   value,
   onChange,
-  placeholder = 'Search plugins…',
+  placeholder = 'Search plugins',
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -15,11 +15,8 @@ export function SearchBar({
 }) {
   const theme = useTheme();
   return (
-    <View
-      style={[styles.wrap, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
-      <ThemedText type="default" themeColor="textSecondary">
-        🔍
-      </ThemedText>
+    <View style={[styles.wrap, { backgroundColor: theme.surface, borderColor: theme.border }]}>
+      <Icon name="search" size={18} color={theme.textSecondary} />
       <TextInput
         value={value}
         onChangeText={onChange}
@@ -39,15 +36,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.two,
     paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Radius.pill,
-    borderWidth: StyleSheet.hairlineWidth * 2,
+    paddingVertical: 10,
+    borderRadius: Radius.md,
+    borderWidth: 1,
   },
   input: {
     flex: 1,
     fontSize: 16,
-    paddingVertical: 4,
-    // remove web focus outline; RN web passes this through
+    paddingVertical: 2,
     outlineStyle: 'none',
   } as object,
 });

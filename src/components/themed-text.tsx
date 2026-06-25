@@ -4,8 +4,8 @@ import { Fonts, type ThemeColor } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 type TextType =
-  | 'display' // big classical serif headline
-  | 'title' // page/section serif title
+  | 'display' // serif headline
+  | 'title' // serif section/page title
   | 'heading' // smaller serif heading
   | 'subtitle'
   | 'lead' // intro paragraph
@@ -55,20 +55,20 @@ const defaultFamily: Record<TextType, FontFamily> = {
 };
 
 const styles = StyleSheet.create({
-  display: { fontSize: 52, lineHeight: 56, fontWeight: '600', letterSpacing: -0.5 },
-  title: { fontSize: 34, lineHeight: 40, fontWeight: '600', letterSpacing: -0.3 },
-  heading: { fontSize: 24, lineHeight: 30, fontWeight: '600' },
-  subtitle: { fontSize: 20, lineHeight: 28, fontWeight: '600' },
-  lead: { fontSize: 18, lineHeight: 28, fontWeight: '400' },
-  default: { fontSize: 16, lineHeight: 24, fontWeight: '400' },
+  display: { fontSize: 42, lineHeight: 47, fontWeight: '500', letterSpacing: -0.4 },
+  title: { fontSize: 28, lineHeight: 34, fontWeight: '500', letterSpacing: -0.2 },
+  heading: { fontSize: 20, lineHeight: 26, fontWeight: '500' },
+  subtitle: { fontSize: 18, lineHeight: 26, fontWeight: '600' },
+  lead: { fontSize: 17, lineHeight: 27, fontWeight: '400' },
+  default: { fontSize: 16, lineHeight: 25, fontWeight: '400' },
   small: { fontSize: 14, lineHeight: 20, fontWeight: '400' },
-  smallBold: { fontSize: 14, lineHeight: 20, fontWeight: '700' },
+  smallBold: { fontSize: 14, lineHeight: 20, fontWeight: '600' },
   eyebrow: {
-    fontSize: 12,
+    fontSize: 11.5,
     lineHeight: 16,
-    fontWeight: '700',
-    letterSpacing: 1.5,
+    fontWeight: '600',
+    letterSpacing: 1.3,
     textTransform: 'uppercase',
   },
-  code: { fontSize: 13, lineHeight: 20, fontWeight: '500' },
+  code: { fontSize: 13.5, lineHeight: 20, fontWeight: '500' },
 });

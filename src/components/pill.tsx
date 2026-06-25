@@ -4,60 +4,47 @@ import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-/** A small rounded label, optionally tinted by an accent color (e.g. a category). */
+/** A small, neutral tag — hairline bordered, no per-item color. `mono` for code-ish labels. */
 export function Pill({
   label,
-  color,
-  glyph,
-  emphasis = 'soft',
+  mono = false,
+  tone = 'neutral',
   style,
 }: {
   label: string;
-  color?: string;
-  glyph?: string;
-  emphasis?: 'soft' | 'outline';
+  mono?: boolean;
+  tone?: 'neutral' | 'accent';
   style?: ViewStyle;
 }) {
   const theme = useTheme();
-  const tint = color ?? theme.textSecondary;
-
+  const color = tone === 'accent' ? theme.accent : theme.textSecondary;
   return (
-    <View
-      style={[
-        styles.pill,
-        emphasis === 'soft'
-          ? { backgroundColor: withAlpha(tint, 0.14) }
-          : { borderWidth: StyleSheet.hairlineWidth * 2, borderColor: theme.border },
-        style,
-      ]}>
-      {glyph ? <ThemedText type="small">{glyph}</ThemedText> : null}
-      <ThemedText type="small" style={[styles.label, { color: emphasis === 'soft' ? tint : theme.textSecondary }]}>
+    <View style={[styles.pill, { borderColor: theme.border }, style]}>
+      <ThemedText
+        type={mono ? 'code' : 'small'}
+        style={[styles.label, mono ? styles.mono : null, { color }]}>
         {label}
       </ThemedText>
     </View>
   );
 }
 
-/** #RRGGBB -> rgba() with the given alpha. Falls back to the input for non-hex colors. */
+/** #RRGGBB -> rgba() with the given alpha. Kept for occasional accent tints. */
 export function withAlpha(hex: string, alpha: number): string {
   const m = /^#?([\da-f]{6})$/i.exec(hex.trim());
   if (!m) return hex;
   const n = parseInt(m[1], 16);
-  const r = (n >> 16) & 255;
-  const g = (n >> 8) & 255;
-  const b = n & 255;
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
 }
 
 const styles = StyleSheet.create({
   pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.one,
-    paddingVertical: 4,
+    paddingVertical: 2,
     paddingHorizontal: Spacing.two,
-    borderRadius: Radius.pill,
+    borderRadius: Radius.sm,
+    borderWidth: 1,
     alignSelf: 'flex-start',
   },
-  label: { fontWeight: '600' },
+  label: { fontWeight: '500' },
+  mono: { fontSize: 12 },
 });

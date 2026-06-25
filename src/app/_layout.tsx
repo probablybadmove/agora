@@ -1,18 +1,15 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/theme';
 
+// Light-only.
 export default function RootLayout() {
-  const scheme = useColorScheme();
-  const isDark = scheme === 'dark';
-  const colors = Colors[isDark ? 'dark' : 'light'];
-
+  const colors = Colors.light;
   return (
     <SafeAreaProvider>
-      <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={DefaultTheme}>
         <Stack
           screenOptions={{
             headerShown: false,
@@ -20,7 +17,7 @@ export default function RootLayout() {
             animation: 'fade',
           }}
         />
-        <StatusBar style={isDark ? 'light' : 'dark'} />
+        <StatusBar style="dark" />
       </ThemeProvider>
     </SafeAreaProvider>
   );

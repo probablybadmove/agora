@@ -17,7 +17,7 @@ export default function DocsScreen() {
         description="Add the Agora marketplace to Claude Code, install plugins, and publish your own."
         path="/docs"
       />
-      <Section eyebrow="Documentation" title="Add Agora to Claude Code">
+      <Section label="Documentation" title="Add Agora to Claude Code">
         <Markdown content={stripLeadingHeading(COPY.addToClaudeMarkdown)} />
       </Section>
 
@@ -29,7 +29,7 @@ export default function DocsScreen() {
         <Markdown content={stripLeadingHeading(COPY.aboutMarkdown)} />
       </Section>
 
-      <Section eyebrow="Questions" title="FAQ">
+      <Section label="Questions" title="FAQ">
         <View style={styles.faq}>
           {COPY.faq.map((item) => (
             <FaqItem key={item.q} q={item.q} a={item.a} />

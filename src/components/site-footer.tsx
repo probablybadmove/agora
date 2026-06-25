@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AgoraMark } from '@/components/agora-mark';
 import { ExternalLink } from '@/components/external-link';
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { MARKETPLACE } from '@/data/catalog';
@@ -17,7 +18,7 @@ export function SiteFooter() {
       <View style={styles.inner}>
         <View style={styles.brandCol}>
           <View style={styles.brandRow}>
-            <AgoraMark size={22} color={theme.textSecondary} />
+            <AgoraMark size={20} color={theme.textSecondary} />
             <ThemedText type="heading" family="serif">
               Agora
             </ThemedText>
@@ -28,20 +29,22 @@ export function SiteFooter() {
         </View>
 
         <View style={styles.links}>
-          <FooterLink href="/browse" label="Browse plugins" />
-          <FooterLink href="/docs" label="Add to Claude Code" />
+          <FooterLink href="/browse" label="Browse" />
+          <FooterLink href="/docs" label="Docs" />
           <ExternalLink href={GITHUB_URL} asChild>
-            <Pressable accessibilityRole="link">
+            <Pressable accessibilityRole="link" style={styles.ext}>
+              <Icon name="github" size={15} color={theme.textSecondary} />
               <ThemedText type="small" themeColor="textSecondary">
                 GitHub
               </ThemedText>
             </Pressable>
           </ExternalLink>
           <ExternalLink href="https://gagansingh.tech" asChild>
-            <Pressable accessibilityRole="link">
+            <Pressable accessibilityRole="link" style={styles.ext}>
               <ThemedText type="small" themeColor="textSecondary">
                 gagansingh.tech
               </ThemedText>
+              <Icon name="arrow-up-right" size={13} color={theme.textSecondary} />
             </Pressable>
           </ExternalLink>
         </View>
@@ -49,7 +52,7 @@ export function SiteFooter() {
 
       <View style={styles.innerBottom}>
         <ThemedText type="small" themeColor="textSecondary">
-          © {YEAR} Agora · Built by Gagan Singh · MIT licensed
+          © {YEAR} Agora · Built by Gagan Singh · MIT
         </ThemedText>
       </View>
     </View>
@@ -72,7 +75,7 @@ function FooterLink({ href, label }: { href: '/browse' | '/docs'; label: string 
 
 const styles = StyleSheet.create({
   footer: {
-    borderTopWidth: StyleSheet.hairlineWidth * 2,
+    borderTopWidth: 1,
     marginTop: Spacing.six,
     paddingVertical: Spacing.five,
     paddingHorizontal: Spacing.three,
@@ -96,4 +99,5 @@ const styles = StyleSheet.create({
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   tagline: {},
   links: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.four, alignItems: 'center' },
+  ext: { flexDirection: 'row', alignItems: 'center', gap: 5 },
 });

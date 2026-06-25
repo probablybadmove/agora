@@ -1,7 +1,8 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { Pill, withAlpha } from '@/components/pill';
+import { Icon } from '@/components/icon';
+import { Pill } from '@/components/pill';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import type { Category, Plugin } from '@/data/types';
@@ -13,43 +14,43 @@ export function PluginCard({ plugin, category }: { plugin: Plugin; category?: Ca
   return (
     <Link href={{ pathname: '/plugin/[slug]', params: { slug: plugin.slug } }} asChild>
       <Pressable accessibilityRole="link" style={styles.pressable}>
-        {({ pressed, hovered }: { pressed: boolean; hovered?: boolean }) => (
+        {({ hovered }: { pressed: boolean; hovered?: boolean }) => (
           <View
             style={[
               styles.card,
               {
-                backgroundColor: theme.backgroundElement,
-                borderColor: hovered ? withAlpha(plugin.color, 0.6) : theme.border,
-                opacity: pressed ? 0.9 : 1,
-                transform: [{ translateY: hovered ? -2 : 0 }],
+                backgroundColor: hovered ? theme.backgroundElement : theme.surface,
+                borderColor: hovered ? theme.borderStrong : theme.border,
               },
             ]}>
             <View style={styles.top}>
-              <View style={[styles.glyph, { backgroundColor: withAlpha(plugin.color, 0.16) }]}>
-                <ThemedText style={styles.glyphText}>{plugin.glyph}</ThemedText>
-              </View>
-              <Pill
-                label={plugin.kind === 'agent' ? 'Subagent' : 'Skill'}
-                color={theme.textSecondary}
-              />
+              <ThemedText type="eyebrow" themeColor="textSecondary">
+                {category?.name ?? plugin.category}
+              </ThemedText>
+              <Pill label={plugin.kind === 'agent' ? 'agent' : 'skill'} mono />
             </View>
 
             <View style={styles.body}>
               <ThemedText type="heading" numberOfLines={1}>
                 {plugin.displayName}
               </ThemedText>
-              <ThemedText type="small" themeColor="textSecondary" numberOfLines={3} style={styles.desc}>
+              <ThemedText
+                type="small"
+                themeColor="textSecondary"
+                numberOfLines={3}
+                style={styles.desc}>
                 {plugin.description}
               </ThemedText>
             </View>
 
-            <View style={styles.footer}>
-              {category ? (
-                <Pill label={category.name} glyph={category.glyph} color={plugin.color} />
-              ) : null}
-              <ThemedText type="code" themeColor="textSecondary" numberOfLines={1} style={styles.invoke}>
+            <View style={[styles.footer, { borderTopColor: theme.border }]}>
+              <ThemedText type="code" numberOfLines={1} style={styles.invoke}>
+                <ThemedText type="code" style={{ color: theme.accent }}>
+                  ›{' '}
+                </ThemedText>
                 {plugin.invocation}
               </ThemedText>
+              <Icon name="arrow-right" size={16} color={hovered ? theme.accent : theme.textSecondary} />
             </View>
           </View>
         )}
@@ -62,24 +63,15 @@ const styles = StyleSheet.create({
   pressable: { flex: 1 },
   card: {
     flex: 1,
-    borderWidth: StyleSheet.hairlineWidth * 2,
+    borderWidth: 1,
     borderRadius: Radius.lg,
     padding: Spacing.three,
     gap: Spacing.three,
-    minHeight: 196,
-    // smooth hover lift on web
-    transitionProperty: 'transform, border-color',
-    transitionDuration: '160ms',
+    minHeight: 200,
+    transitionProperty: 'background-color, border-color',
+    transitionDuration: '140ms',
   } as object,
   top: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  glyph: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  glyphText: { fontSize: 22, lineHeight: 28 },
   body: { gap: 6, flex: 1 },
   desc: {},
   footer: {
@@ -87,6 +79,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
+    borderTopWidth: 1,
+    paddingTop: Spacing.three,
   },
-  invoke: { flexShrink: 1, textAlign: 'right' },
+  invoke: { flexShrink: 1 },
 });

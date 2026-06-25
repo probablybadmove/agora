@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { Pill, withAlpha } from '@/components/pill';
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import type { CategoryWithCount } from '@/data/types';
@@ -17,16 +17,15 @@ export function CategoryTile({ category }: { category: CategoryWithCount }) {
             style={[
               styles.tile,
               {
-                backgroundColor: theme.backgroundElement,
-                borderColor: hovered ? withAlpha(category.color, 0.6) : theme.border,
-                transform: [{ translateY: hovered ? -2 : 0 }],
+                backgroundColor: hovered ? theme.backgroundElement : theme.surface,
+                borderColor: hovered ? theme.borderStrong : theme.border,
               },
             ]}>
             <View style={styles.top}>
-              <View style={[styles.glyph, { backgroundColor: withAlpha(category.color, 0.16) }]}>
-                <ThemedText style={styles.glyphText}>{category.glyph}</ThemedText>
-              </View>
-              <Pill label={`${category.count}`} color={category.color} />
+              <ThemedText type="code" style={{ color: theme.accent }}>
+                {String(category.count).padStart(2, '0')}
+              </ThemedText>
+              <Icon name="arrow-right" size={15} color={hovered ? theme.accent : theme.textSecondary} />
             </View>
             <ThemedText type="heading">{category.name}</ThemedText>
             <ThemedText type="small" themeColor="textSecondary" numberOfLines={2}>
@@ -43,21 +42,13 @@ const styles = StyleSheet.create({
   pressable: { flex: 1 },
   tile: {
     flex: 1,
-    borderWidth: StyleSheet.hairlineWidth * 2,
+    borderWidth: 1,
     borderRadius: Radius.lg,
     padding: Spacing.three,
     gap: Spacing.two,
-    minHeight: 150,
-    transitionProperty: 'transform, border-color',
-    transitionDuration: '160ms',
+    minHeight: 138,
+    transitionProperty: 'background-color, border-color',
+    transitionDuration: '140ms',
   } as object,
   top: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  glyph: {
-    width: 40,
-    height: 40,
-    borderRadius: Radius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  glyphText: { fontSize: 20, lineHeight: 26 },
 });

@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
+import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
 import { Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-/** A terminal-style snippet box. On web it offers one-click copy. */
+/** A quiet command line with a `›` prompt and one-click copy on web. No terminal chrome. */
 export function CodeBlock({ code, label }: { code: string; label?: string }) {
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
-
   const canCopy = Platform.OS === 'web';
+
   const onCopy = () => {
     if (Platform.OS === 'web' && typeof navigator !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(code).then(() => {
@@ -21,29 +22,31 @@ export function CodeBlock({ code, label }: { code: string; label?: string }) {
   };
 
   return (
-    <View style={[styles.wrap, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
-      <View style={styles.row}>
-        <View style={styles.dots}>
-          <View style={[styles.dot, { backgroundColor: '#E0795A' }]} />
-          <View style={[styles.dot, { backgroundColor: theme.gold }]} />
-          <View style={[styles.dot, { backgroundColor: '#5BB98B' }]} />
-        </View>
+    <View
+      style={[styles.wrap, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+      <View style={styles.line}>
+        <ThemedText type="code" style={{ color: theme.accent }}>
+          ›{' '}
+        </ThemedText>
+        <ThemedText type="code" selectable style={styles.code}>
+          {code}
+        </ThemedText>
+      </View>
+      <View style={styles.right}>
         {label ? (
-          <ThemedText type="small" themeColor="textSecondary">
+          <ThemedText type="code" themeColor="textSecondary" style={styles.label}>
             {label}
           </ThemedText>
         ) : null}
         {canCopy ? (
-          <Pressable onPress={onCopy} accessibilityRole="button" style={styles.copyBtn} hitSlop={8}>
-            <ThemedText type="small" style={{ color: theme.primary, fontWeight: '600' }}>
-              {copied ? 'Copied ✓' : 'Copy'}
+          <Pressable onPress={onCopy} accessibilityRole="button" hitSlop={8} style={styles.copy}>
+            <Icon name={copied ? 'check' : 'copy'} size={14} color={theme.textSecondary} />
+            <ThemedText type="code" themeColor="textSecondary">
+              {copied ? 'Copied' : 'Copy'}
             </ThemedText>
           </Pressable>
         ) : null}
       </View>
-      <ThemedText type="code" selectable style={styles.code}>
-        {code}
-      </ThemedText>
     </View>
   );
 }
@@ -51,14 +54,17 @@ export function CodeBlock({ code, label }: { code: string; label?: string }) {
 const styles = StyleSheet.create({
   wrap: {
     borderRadius: Radius.md,
-    borderWidth: StyleSheet.hairlineWidth * 2,
-    padding: Spacing.three,
-    gap: Spacing.two,
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: Spacing.three,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
     width: '100%',
   },
-  row: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
-  dots: { flexDirection: 'row', gap: 6, marginRight: 'auto' },
-  dot: { width: 10, height: 10, borderRadius: 5 },
-  copyBtn: { marginLeft: 'auto', paddingHorizontal: 4 },
-  code: { },
+  line: { flexDirection: 'row', alignItems: 'baseline', flex: 1, flexWrap: 'wrap' },
+  code: { flexShrink: 1 },
+  right: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  label: {},
+  copy: { flexDirection: 'row', alignItems: 'center', gap: 5 },
 });

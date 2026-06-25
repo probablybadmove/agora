@@ -5,19 +5,19 @@ import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Button } from '@/components/button';
 import { CodeBlock } from '@/components/code-block';
 import { ExternalLink } from '@/components/external-link';
+import { Icon } from '@/components/icon';
 import { Page } from '@/components/page';
-import { Pill, withAlpha } from '@/components/pill';
+import { Pill } from '@/components/pill';
 import { PluginGrid } from '@/components/plugin-grid';
 import { Section } from '@/components/section';
 import { Seo } from '@/components/seo';
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { getCategoryBySlug, installCommand, MARKETPLACE, sourceUrl } from '@/data/catalog';
 import { PLUGINS } from '@/data/seed';
 import { useCatalog } from '@/hooks/use-catalog';
 import { useTheme } from '@/hooks/use-theme';
 
-/** Prerender one static HTML page per plugin at export time (great for SEO + deep links). */
 export function generateStaticParams() {
   return PLUGINS.map((p) => ({ slug: p.slug }));
 }
@@ -31,7 +31,8 @@ export default function PluginScreen() {
 
   const plugin = useMemo(() => plugins.find((p) => p.slug === slug), [plugins, slug]);
   const related = useMemo(
-    () => (plugin ? plugins.filter((p) => p.category === plugin.category && p.slug !== plugin.slug) : []),
+    () =>
+      plugin ? plugins.filter((p) => p.category === plugin.category && p.slug !== plugin.slug) : [],
     [plugins, plugin]
   );
 
@@ -53,72 +54,56 @@ export default function PluginScreen() {
 
   return (
     <Page>
-      <Seo
-        title={plugin.displayName}
-        description={plugin.description}
-        path={`/plugin/${plugin.slug}`}
-      />
-      <Link href="/browse" asChild>
-        <Pressable accessibilityRole="link" style={styles.back}>
-          <ThemedText type="small" themeColor="textSecondary">
-            ← Back to catalog
-          </ThemedText>
-        </Pressable>
-      </Link>
+      <Seo title={plugin.displayName} description={plugin.description} path={`/plugin/${plugin.slug}`} />
+
+      <BackLink />
 
       <View style={[styles.head, wide ? styles.headRow : styles.headCol]}>
         <View style={styles.headMain}>
+          {category ? (
+            <Link href={{ pathname: '/category/[slug]', params: { slug: category.slug } }} asChild>
+              <Pressable accessibilityRole="link">
+                <ThemedText type="eyebrow" themeColor="accent">
+                  {category.name}
+                </ThemedText>
+              </Pressable>
+            </Link>
+          ) : null}
           <View style={styles.titleRow}>
-            <View style={[styles.glyph, { backgroundColor: withAlpha(plugin.color, 0.16) }]}>
-              <ThemedText style={styles.glyphText}>{plugin.glyph}</ThemedText>
-            </View>
-            <View style={styles.titleText}>
-              <ThemedText type="title">{plugin.displayName}</ThemedText>
-              <View style={styles.pills}>
-                {category ? (
-                  <Link
-                    href={{ pathname: '/category/[slug]', params: { slug: category.slug } }}
-                    asChild>
-                    <Pressable accessibilityRole="link">
-                      <Pill label={category.name} glyph={category.glyph} color={plugin.color} />
-                    </Pressable>
-                  </Link>
-                ) : null}
-                <Pill
-                  label={plugin.kind === 'agent' ? 'Subagent' : 'Skill'}
-                  color={theme.textSecondary}
-                />
-              </View>
-            </View>
+            <ThemedText type="display" style={styles.title}>
+              {plugin.displayName}
+            </ThemedText>
+            <Pill label={plugin.kind === 'agent' ? 'agent' : 'skill'} mono style={styles.kind} />
           </View>
           <ThemedText type="lead" themeColor="textSecondary" style={styles.desc}>
             {plugin.description}
           </ThemedText>
         </View>
 
-        {/* Install panel */}
         <View
           style={[
             styles.install,
-            { backgroundColor: theme.backgroundElement, borderColor: theme.border },
+            { backgroundColor: theme.surface, borderColor: theme.border },
             wide ? styles.installWide : null,
           ]}>
           <ThemedText type="eyebrow" themeColor="textSecondary">
             Install
           </ThemedText>
-          <CodeBlock code={installCommand(plugin)} label="in Claude Code" />
+          <CodeBlock code={installCommand(plugin)} />
           <ThemedText type="small" themeColor="textSecondary">
-            Then <ThemedText type="code">/reload-plugins</ThemedText> and invoke:
+            Reload, then invoke:
           </ThemedText>
           <CodeBlock code={plugin.invocation} />
-          <ThemedText type="small" themeColor="textSecondary">
-            New here? <LinkText href="/docs" label="Add the marketplace first" />.
-          </ThemedText>
+          <View style={styles.installNote}>
+            <ThemedText type="small" themeColor="textSecondary">
+              New here?{' '}
+            </ThemedText>
+            <LinkText href="/docs" label="Add the marketplace first" />
+          </View>
         </View>
       </View>
 
-      {/* Overview */}
-      <Section eyebrow="Overview" title="What it does">
+      <Section label="Overview" title="What it does">
         <ThemedText type="default" themeColor="textSecondary" style={styles.long}>
           {plugin.longDescription}
         </ThemedText>
@@ -130,27 +115,45 @@ export default function PluginScreen() {
         </View>
         <View style={styles.keywords}>
           {plugin.keywords.map((k) => (
-            <Pill key={k} label={k} emphasis="outline" />
+            <Pill key={k} label={k} />
           ))}
         </View>
         <View style={styles.sourceRow}>
           <ExternalLink href={sourceUrl(plugin)} asChild>
             <Pressable accessibilityRole="link">
-              <Button label="View source on GitHub" variant="secondary" />
+              <Button
+                label="View source"
+                variant="secondary"
+                icon={<Icon name="github" size={16} color={theme.text} />}
+              />
             </Pressable>
           </ExternalLink>
-          <ThemedText type="small" themeColor="textSecondary">
+          <ThemedText type="code" themeColor="textSecondary" numberOfLines={1} style={styles.repoPath}>
             {MARKETPLACE.repo}/{plugin.source.replace('./', '')}
           </ThemedText>
         </View>
       </Section>
 
       {related.length > 0 ? (
-        <Section eyebrow="More in this category" title={category?.name ?? 'Related'}>
+        <Section label="More in this category" title={category?.name ?? 'Related'}>
           <PluginGrid plugins={related} />
         </Section>
       ) : null}
     </Page>
+  );
+}
+
+function BackLink() {
+  const theme = useTheme();
+  return (
+    <Link href="/browse" asChild>
+      <Pressable accessibilityRole="link" style={styles.back}>
+        <Icon name="arrow-left" size={15} color={theme.textSecondary} />
+        <ThemedText type="small" themeColor="textSecondary">
+          Back to catalog
+        </ThemedText>
+      </Pressable>
+    </Link>
   );
 }
 
@@ -171,7 +174,7 @@ function LinkText({ href, label }: { href: '/docs'; label: string }) {
   return (
     <Link href={href} asChild>
       <Pressable accessibilityRole="link">
-        <ThemedText type="small" style={{ color: theme.primary, fontWeight: '600' }}>
+        <ThemedText type="small" style={{ color: theme.accent, fontWeight: '600' }}>
           {label}
         </ThemedText>
       </Pressable>
@@ -181,41 +184,35 @@ function LinkText({ href, label }: { href: '/docs'; label: string }) {
 
 const styles = StyleSheet.create({
   notFound: { gap: Spacing.three, alignItems: 'flex-start', paddingVertical: Spacing.six },
-  back: { alignSelf: 'flex-start' },
+  back: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start' },
   head: { gap: Spacing.four, width: '100%' },
   headRow: { flexDirection: 'row', alignItems: 'flex-start' },
   headCol: { flexDirection: 'column' },
-  headMain: { flex: 1.2, gap: Spacing.three, minWidth: 280 },
-  titleRow: { flexDirection: 'row', gap: Spacing.three, alignItems: 'center' },
-  glyph: {
-    width: 60,
-    height: 60,
-    borderRadius: Radius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  glyphText: { fontSize: 30, lineHeight: 36 },
-  titleText: { gap: Spacing.two, flexShrink: 1 },
-  pills: { flexDirection: 'row', gap: Spacing.two, flexWrap: 'wrap' },
-  desc: { maxWidth: 560 },
+  headMain: { flex: 1.2, gap: Spacing.two, minWidth: 280 },
+  titleRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, flexWrap: 'wrap' },
+  title: { flexShrink: 1 },
+  kind: { marginTop: 6 },
+  desc: { maxWidth: 560, marginTop: Spacing.one },
   install: {
-    borderWidth: StyleSheet.hairlineWidth * 2,
-    borderRadius: Radius.xl,
+    borderWidth: 1,
+    borderRadius: 12,
     padding: Spacing.four,
     gap: Spacing.two,
     width: '100%',
   },
   installWide: { flex: 0.9, maxWidth: 420 },
-  long: { maxWidth: 760 },
-  meta: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.three },
+  installNote: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 2 },
+  long: { maxWidth: 740 },
+  meta: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   metaItem: {
-    borderWidth: StyleSheet.hairlineWidth * 2,
-    borderRadius: Radius.md,
+    borderWidth: 1,
+    borderRadius: 6,
     paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.three,
     gap: 4,
-    minWidth: 120,
+    minWidth: 116,
   },
   keywords: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   sourceRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, flexWrap: 'wrap' },
+  repoPath: { flexShrink: 1 },
 });

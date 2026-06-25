@@ -3,19 +3,18 @@ import { useMemo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
 import { Page } from '@/components/page';
-import { withAlpha } from '@/components/pill';
 import { PluginGrid } from '@/components/plugin-grid';
 import { Section } from '@/components/section';
 import { Seo } from '@/components/seo';
 import { ThemedText } from '@/components/themed-text';
-import { Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { getCategoryBySlug } from '@/data/catalog';
 import { CATEGORIES } from '@/data/seed';
 import { useCatalog } from '@/hooks/use-catalog';
 import { useTheme } from '@/hooks/use-theme';
 
-/** Prerender one static HTML page per category at export time. */
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ slug: c.slug }));
 }
@@ -45,27 +44,24 @@ export default function CategoryScreen() {
         description={category.description}
         path={`/category/${category.slug}`}
       />
+
       <Link href="/browse" asChild>
         <Pressable accessibilityRole="link" style={styles.back}>
+          <Icon name="arrow-left" size={15} color={theme.textSecondary} />
           <ThemedText type="small" themeColor="textSecondary">
-            ← Back to catalog
+            Back to catalog
           </ThemedText>
         </Pressable>
       </Link>
 
       <View style={styles.header}>
-        <View style={[styles.glyph, { backgroundColor: withAlpha(category.color, 0.16) }]}>
-          <ThemedText style={styles.glyphText}>{category.glyph}</ThemedText>
-        </View>
-        <View style={styles.headerText}>
-          <ThemedText type="eyebrow" themeColor="accent">
-            Category
-          </ThemedText>
-          <ThemedText type="display">{category.name}</ThemedText>
-          <ThemedText type="lead" themeColor="textSecondary" style={{ maxWidth: 560 }}>
-            {category.description}
-          </ThemedText>
-        </View>
+        <ThemedText type="eyebrow" themeColor="accent">
+          Category · {String(items.length).padStart(2, '0')}
+        </ThemedText>
+        <ThemedText type="display">{category.name}</ThemedText>
+        <ThemedText type="lead" themeColor="textSecondary" style={{ maxWidth: 560 }}>
+          {category.description}
+        </ThemedText>
       </View>
 
       <Section title={`${items.length} ${items.length === 1 ? 'plugin' : 'plugins'}`}>
@@ -77,15 +73,6 @@ export default function CategoryScreen() {
 
 const styles = StyleSheet.create({
   notFound: { gap: Spacing.three, alignItems: 'flex-start', paddingVertical: Spacing.six },
-  back: { alignSelf: 'flex-start' },
-  header: { flexDirection: 'row', gap: Spacing.three, alignItems: 'center', flexWrap: 'wrap' },
-  glyph: {
-    width: 72,
-    height: 72,
-    borderRadius: Radius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  glyphText: { fontSize: 36, lineHeight: 42 },
-  headerText: { gap: Spacing.two, flexShrink: 1, minWidth: 240 },
+  back: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start' },
+  header: { gap: Spacing.two },
 });
