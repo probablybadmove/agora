@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "changelog-smith",
+  "description": "Generate or update a Keep a Changelog CHANGELOG.md from your git commit history since the last tag, grouping changes into Added/Changed/Deprecated/Removed/Fixed/Security and recommending the next semver bump.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "changelog",
+    "keep-a-changelog",
+    "semver",
+    "git",
+    "release",
+    "conventional-commits"
+  ]
+}

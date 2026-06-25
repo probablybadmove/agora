@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "a11y-auditor",
+  "description": "A subagent that audits React, React Native, and HTML UI code for WCAG 2.1 AA issues — missing alt text, label associations, color-contrast risks, keyboard traps, focus order, and ARIA misuse — and reports prioritized, file:line-anchored fixes.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "aria",
+    "react",
+    "react-native",
+    "html",
+    "audit",
+    "quality"
+  ]
+}

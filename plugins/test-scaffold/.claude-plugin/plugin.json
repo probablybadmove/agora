@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "test-scaffold",
+  "description": "Scaffold an idiomatic test file for a source file. Auto-detects the project's test framework (jest, vitest, pytest, or go test) and generates stubs covering the public API and edge cases.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "scaffold",
+    "jest",
+    "vitest",
+    "pytest",
+    "go-test",
+    "unit-tests",
+    "tdd"
+  ]
+}

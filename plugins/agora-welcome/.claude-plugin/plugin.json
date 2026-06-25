@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "agora-welcome",
+  "description": "The welcome desk for the Agora marketplace: explains what Agora is, how to install plugins with /plugin install <name>@agora, and lists the available plugin categories.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "agora",
+    "marketplace",
+    "welcome",
+    "meta",
+    "onboarding",
+    "plugins"
+  ]
+}

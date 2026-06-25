@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "pr-author",
+  "description": "Draft a clear pull-request title and description from the diff between the current branch and its base, including a summary, changes list, test plan, and a review checklist.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "git",
+    "pull-request",
+    "pr",
+    "diff",
+    "code-review",
+    "github"
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
+  "name": "agora",
+  "owner": {
+    "name": "Gagan Singh"
+  },
+  "description": "Agora — the public square for Claude Code plugins. Focused slash commands and subagents that read your repo before they act.",
+  "version": "1.0.0",
+  "metadata": {
+    "description": "Agora — the public square for Claude Code plugins. Focused slash commands and subagents that read your repo before they act.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "conventional-commits",
+      "source": "./plugins/conventional-commits",
+      "description": "Turn your staged git diff into a clean Conventional Commits message — breaking-change detection included.",
+      "category": "Git",
+      "keywords": [
+        "git",
+        "commit",
+        "conventional-commits",
+        "changelog",
+        "semver",
+        "breaking-changes"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "pr-author",
+      "source": "./plugins/pr-author",
+      "description": "Draft a clear PR title and description from your branch diff — summary, changes, test plan, and checklist.",
+      "category": "Git",
+      "keywords": [
+        "git",
+        "pull-request",
+        "pr",
+        "diff",
+        "code-review",
+        "github"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "changelog-smith",
+      "source": "./plugins/changelog-smith",
+      "description": "Generate or update a Keep a Changelog CHANGELOG.md from git commits since the last tag, with semver recommendations.",
+      "category": "Git",
+      "keywords": [
+        "changelog",
+        "keep-a-changelog",
+        "semver",
+        "git",
+        "release",
+        "release-notes"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "test-scaffold",
+      "source": "./plugins/test-scaffold",
+      "description": "Scaffold idiomatic test stubs for any source file, auto-detecting jest, vitest, pytest, or go test.",
+      "category": "Testing",
+      "keywords": [
+        "testing",
+        "scaffold",
+        "jest",
+        "vitest",
+        "pytest",
+        "go-test"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "dockerize",
+      "source": "./plugins/dockerize",
+      "description": "Generate a production-ready multi-stage Dockerfile and tailored .dockerignore for your detected stack.",
+      "category": "DevOps",
+      "keywords": [
+        "docker",
+        "dockerfile",
+        "dockerignore",
+        "containers",
+        "devops",
+        "multi-stage"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "regex-sage",
+      "source": "./plugins/regex-sage",
+      "description": "Turn plain English into a correct, fully-explained regex with test strings, runtime verification, and language flavors.",
+      "category": "Utility",
+      "keywords": [
+        "regex",
+        "regular-expression",
+        "pattern",
+        "validation",
+        "text-processing",
+        "pcre"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "sql-tune",
+      "source": "./plugins/sql-tune",
+      "description": "Explain any SQL query in plain English, then suggest dialect-aware fixes: indexes, sargability, N+1, and a rewrite.",
+      "category": "Data",
+      "keywords": [
+        "sql",
+        "database",
+        "query-optimization",
+        "indexing",
+        "performance",
+        "postgres"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "license-add",
+      "source": "./plugins/license-add",
+      "description": "Add an SPDX-correct LICENSE file with the right year, author, and matching package metadata in one step.",
+      "category": "Project",
+      "keywords": [
+        "license",
+        "spdx",
+        "mit",
+        "apache-2.0",
+        "open-source",
+        "compliance"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "a11y-auditor",
+      "source": "./plugins/a11y-auditor",
+      "description": "Audit React, React Native, and HTML UI code for WCAG 2.1 AA issues with prioritized, file:line-anchored fixes.",
+      "category": "Quality",
+      "keywords": [
+        "accessibility",
+        "a11y",
+        "wcag",
+        "aria",
+        "react",
+        "react-native"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    },
+    {
+      "name": "agora-welcome",
+      "source": "./plugins/agora-welcome",
+      "description": "The Agora marketplace welcome desk — explains Agora, teaches plugin install, and lists categories.",
+      "category": "Meta",
+      "keywords": [
+        "agora",
+        "marketplace",
+        "welcome",
+        "meta",
+        "onboarding",
+        "plugins"
+      ],
+      "author": {
+        "name": "Gagan Singh"
+      }
+    }
+  ]
+}

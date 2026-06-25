@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "regex-sage",
+  "description": "Build a correct regular expression from a plain-English description, explain each component, supply matching and non-matching test strings, and offer language-specific flavors (PCRE, JavaScript, Python, Go, Java, .NET).",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "regex",
+    "regular-expression",
+    "pattern",
+    "validation",
+    "text-processing",
+    "pcre",
+    "developer-tools"
+  ]
+}

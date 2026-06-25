@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "dockerize",
+  "description": "Generate a production-ready multi-stage Dockerfile and a tailored .dockerignore for the detected stack (Node, Python, Go, etc.), using non-root users and small base images.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "docker",
+    "dockerfile",
+    "dockerignore",
+    "containers",
+    "devops",
+    "multi-stage",
+    "production",
+    "non-root"
+  ]
+}

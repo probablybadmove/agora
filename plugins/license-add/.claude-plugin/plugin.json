@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "license-add",
+  "description": "Add an SPDX-correct LICENSE file to your project. Infers or asks for the license (MIT, Apache-2.0, GPL-3.0, BSD-3-Clause), fills in the year and author, and updates package metadata when present.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "license",
+    "spdx",
+    "mit",
+    "apache",
+    "gpl",
+    "bsd",
+    "open-source",
+    "compliance",
+    "project"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "sql-tune",
+  "description": "Explain what a SQL query does in plain English, then suggest dialect-aware optimizations: missing indexes, sargability fixes, N+1 patterns, and a rewritten query.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "sql",
+    "database",
+    "query-optimization",
+    "indexing",
+    "performance",
+    "explain",
+    "postgres",
+    "mysql"
+  ]
+}

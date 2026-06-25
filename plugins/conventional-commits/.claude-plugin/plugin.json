@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "conventional-commits",
+  "description": "Generate a Conventional Commits message from your staged git diff — type(scope): summary, body, and footers — with breaking-change detection and an offer to run the commit.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gagan Singh",
+    "url": "https://gagansingh.tech"
+  },
+  "homepage": "https://gagansingh.tech",
+  "license": "MIT",
+  "keywords": [
+    "git",
+    "commit",
+    "conventional-commits",
+    "changelog",
+    "semver",
+    "breaking-changes"
+  ]
+}

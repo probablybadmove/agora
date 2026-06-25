@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="Agora">
+  <rect width="48" height="48" rx="11" fill="#1C1A15"/>
+  <g fill="#E0795A">
+    <polygon points="24,8 41,18.5 7,18.5"/>
+    <rect x="7" y="19.5" width="34" height="3" rx="1"/>
+    <rect x="11" y="24" width="3" height="12" rx="1"/>
+    <rect x="18.2" y="24" width="3" height="12" rx="1"/>
+    <rect x="26.8" y="24" width="3" height="12" rx="1"/>
+    <rect x="34" y="24" width="3" height="12" rx="1"/>
+    <rect x="6" y="37" width="36" height="3.2" rx="1.1"/>
+  </g>
+</svg>

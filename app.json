@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "agora",
+    "name": "Agora",
     "slug": "agora",
+    "description": "The public square for Claude Code plugins. Browse skills and subagents, then install in one command.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -28,7 +29,8 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#FBF7EF",
+          "dark": { "backgroundColor": "#16140F" },
           "android": {
             "image": "./assets/images/splash-icon.png",
             "imageWidth": 76
