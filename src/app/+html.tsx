@@ -32,7 +32,7 @@ export default function Root({ children }: PropsWithChildren) {
           property="og:description"
           content="The public square for Claude Code plugins. Browse, then install in one command."
         />
-        <meta property="og:url" content="https://gagansingh.tech" />
+        <meta property="og:url" content="https://agora.gagansingh.tech" />
         <meta name="twitter:card" content="summary_large_image" />
 
         {/* Fonts */}

@@ -4,8 +4,8 @@
     "displayName": "Agora",
     "description": "Agora — the public square for Claude Code plugins. Focused slash commands and subagents that read your repo before they act.",
     "version": "1.0.0",
-    "domain": "gagansingh.tech",
-    "url": "https://gagansingh.tech",
+    "domain": "agora.gagansingh.tech",
+    "url": "https://agora.gagansingh.tech",
     "repo": "probablybadmove/agora",
     "repoUrl": "https://github.com/probablybadmove/agora.git",
     "owner": { "name": "Gagan Singh" }

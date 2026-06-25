@@ -1,7 +1,7 @@
 # Agora — project guide
 
 A universal (web + iOS + Android) **Claude Code plugin marketplace**, built with Expo Router +
-React Native Web, hosted at gagansingh.tech (Vercel). It is BOTH a browsable website and a real,
+React Native Web, hosted at agora.gagansingh.tech (Vercel). It is BOTH a browsable website and a real,
 installable Claude Code marketplace.
 
 > Expo SDK 56. Read the versioned docs at https://docs.expo.dev/versions/v56.0.0/ before writing
@@ -18,7 +18,7 @@ npm run build:catalog
 
 This regenerates, and they must never be hand-edited:
 - `.claude-plugin/marketplace.json` — relative sources (git-based `/plugin marketplace add probablybadmove/agora`)
-- `public/marketplace.json` — `git-subdir` sources (hosted-URL add via gagansingh.tech/marketplace.json)
+- `public/marketplace.json` — `git-subdir` sources (hosted-URL add via agora.gagansingh.tech/marketplace.json)
 - `supabase/seed.sql` — DB seed
 
 `src/data/seed.ts` is a typed view over `catalog.json`; the website renders from it instantly.
@@ -45,7 +45,7 @@ This regenerates, and they must never be hand-edited:
 ## Deploy
 
 - Web → Vercel (`vercel.json` is ready: build, `dist`, clean URLs, dynamic rewrites). Add the
-  `gagansingh.tech` domain in Vercel + point DNS.
+  `agora.gagansingh.tech` domain in Vercel + point DNS.
 - Live catalog → Supabase: apply `supabase/migrations/0001_init.sql` + `supabase/seed.sql`, then set
   the two `EXPO_PUBLIC_*` vars.
 - Native → EAS (`eas.json`). If you fork, update `marketplace.repo`/`repoUrl` in `catalog.json`.

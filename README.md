@@ -4,7 +4,7 @@
 
 Agora is two things at once:
 
-1. **A website** — a fast, browsable catalog (web + iOS + Android, one codebase) hosted at **[gagansingh.tech](https://gagansingh.tech)**.
+1. **A website** — a fast, browsable catalog (web + iOS + Android, one codebase) hosted at **[agora.gagansingh.tech](https://agora.gagansingh.tech)**.
 2. **A real Claude Code marketplace** — add it with `/plugin marketplace add probablybadmove/agora` and install any of its plugins.
 
 The catalog UI and the installable marketplace are backed by **the same plugin data**, so they can never drift.
@@ -94,7 +94,7 @@ npm run build:catalog    # regenerate marketplace.json (x2) + supabase/seed.sql
 /plugin marketplace add probablybadmove/agora
 
 # …or from the hosted manifest
-/plugin marketplace add https://gagansingh.tech/marketplace.json
+/plugin marketplace add https://agora.gagansingh.tech/marketplace.json
 
 # install a plugin, then reload
 /plugin install conventional-commits@agora
@@ -111,7 +111,7 @@ npm run build:catalog    # regenerate marketplace.json (x2) + supabase/seed.sql
 
 ## Deploy
 
-### Website → Vercel + gagansingh.tech
+### Website → Vercel + agora.gagansingh.tech
 
 `vercel.json` is preconfigured (build command, `dist` output, clean URLs, dynamic-route rewrites, JSON headers for the hosted marketplace manifest).
 
@@ -121,7 +121,7 @@ vercel            # link the project (first run)
 vercel --prod     # deploy
 ```
 
-Then add `gagansingh.tech` as a domain in the Vercel project and point your DNS at Vercel (an `A`/`CNAME` record per Vercel's instructions). Once live, both the site and `https://gagansingh.tech/marketplace.json` are served.
+Then add `agora.gagansingh.tech` as a domain in the Vercel project and point your DNS at Vercel (an `A`/`CNAME` record per Vercel's instructions). Once live, both the site and `https://agora.gagansingh.tech/marketplace.json` are served.
 
 > If you fork, update the repo slug in `src/data/catalog.json` (`marketplace.repo` / `repoUrl`) and re-run `npm run build:catalog` so the git-subdir sources point at your repo.
 

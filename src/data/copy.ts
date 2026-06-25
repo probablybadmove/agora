@@ -31,7 +31,7 @@ Agora installs as a plugin marketplace inside Claude Code. Pick whichever source
 **From the hosted manifest:**
 
 \`\`\`
-/plugin marketplace add https://gagansingh.tech/marketplace.json
+/plugin marketplace add https://agora.gagansingh.tech/marketplace.json
 \`\`\`
 
 Either command registers the marketplace under the name \`agora\`.
@@ -129,7 +129,7 @@ Open a PR against \`probablybadmove/agora\` with your new \`plugins/<name>/\` di
     },
     {
       q: 'Should I add Agora via the Git repo or the hosted marketplace.json?',
-      a: 'Either works. `/plugin marketplace add probablybadmove/agora` pulls from the repo and resolves plugins via relative paths, which is the simplest way to stay current. The hosted manifest at https://gagansingh.tech/marketplace.json adds the same catalog with absolute git-subdir sources. Use whichever you prefer.',
+      a: 'Either works. `/plugin marketplace add probablybadmove/agora` pulls from the repo and resolves plugins via relative paths, which is the simplest way to stay current. The hosted manifest at https://agora.gagansingh.tech/marketplace.json adds the same catalog with absolute git-subdir sources. Use whichever you prefer.',
     },
     {
       q: "I installed a plugin but the command isn't showing up. Why?",

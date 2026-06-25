@@ -5,8 +5,8 @@ import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 export const MARKETPLACE = {
   name: 'agora',
   displayName: 'Agora',
-  domain: 'gagansingh.tech',
-  url: 'https://gagansingh.tech',
+  domain: 'agora.gagansingh.tech',
+  url: 'https://agora.gagansingh.tech',
   /** GitHub repo backing the git-based `/plugin marketplace add` form. Update if you fork. */
   repo: 'probablybadmove/agora',
   author: { name: 'Gagan Singh', url: 'https://gagansingh.tech' },

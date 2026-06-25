@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gagansingh.tech/sitemap.xml
+Sitemap: https://agora.gagansingh.tech/sitemap.xml
