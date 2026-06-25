@@ -74,6 +74,7 @@ export default function PluginScreen() {
               {plugin.displayName}
             </ThemedText>
             <Pill label={plugin.kind === 'agent' ? 'agent' : 'skill'} mono style={styles.kind} />
+            {plugin.community ? <Pill label="community" tone="accent" style={styles.kind} /> : null}
           </View>
           <ThemedText type="lead" themeColor="textSecondary" style={styles.desc}>
             {plugin.description}

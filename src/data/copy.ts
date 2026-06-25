@@ -70,53 +70,46 @@ Start with the meta-plugin to see what's on offer:
 /agora-welcome:agora
 \`\`\``,
 
-  publishGuideMarkdown: `## Publish your own plugin
+  publishGuideMarkdown: `## List your plugin
 
-Agora is an open square — bring your own stall. Adding a plugin is a single pull request.
+Agora is an open marketplace — and your plugin stays in **your** repo. We list it by adding one entry to \`marketplace.json\` that points \`source\` at your GitHub repository, so you keep full ownership and control.
 
-### 1. Fork and clone
+### 1. Prepare your plugin
 
-Fork the [\`probablybadmove/agora\`](https://github.com/probablybadmove/agora) repo and clone your fork locally.
-
-### 2. Create your plugin directory
-
-Add a folder under \`plugins/\` named for your plugin:
+Put your plugin in a public GitHub repo with a valid \`.claude-plugin/plugin.json\` at its root:
 
 \`\`\`
-plugins/
-  your-plugin-name/
-    .claude-plugin/
-      plugin.json      # name, description, version, author
-    skills/            # your slash commands (SKILL.md)
-    agents/            # optional: subagents
+your-plugin/
+  .claude-plugin/
+    plugin.json      # name, description, version, author
+  skills/            # your slash commands (SKILL.md)
+  agents/            # optional: subagents
 \`\`\`
 
-Keep it focused: one plugin, one clear job. Make it **project-aware** — detect the stack, framework, or dialect before acting, the way the rest of Agora's plugins do.
+Keep it focused — one plugin, one clear job — and project-aware: read the repo before acting.
 
-### 3. Register it in marketplace.json
+### 2. Submit it
 
-Add an entry to the \`plugins\` array in the top-level \`.claude-plugin/marketplace.json\`, pointing at your directory with a relative \`source\` path:
+Open the [plugin submission form](https://agora.gagansingh.tech/submit). It files a pre-filled GitHub issue with your name, \`owner/repo\`, description, and category. That's the whole submission — no code goes into our repo.
+
+### 3. We review and list it
+
+A maintainer checks your repo, then adds a referencing entry:
 
 \`\`\`json
 {
-  "name": "your-plugin-name",
-  "source": "./plugins/your-plugin-name",
-  "description": "One sharp sentence: what it does and when to reach for it.",
+  "name": "your-plugin",
+  "source": { "source": "github", "repo": "your-username/your-plugin", "ref": "v1.0.0" },
+  "description": "One sharp sentence: what it does.",
   "category": "Git"
 }
 \`\`\`
 
-### 4. Test it locally
+Once merged, anyone can install it with \`/plugin install your-plugin@agora\`, and it appears in the catalog here.
 
-\`\`\`
-/plugin marketplace add <your-username>/agora
-/plugin install your-plugin-name@agora
-/reload-plugins
-\`\`\`
+### Prefer a pull request?
 
-### 5. Open a pull request
-
-Open a PR against \`probablybadmove/agora\` with your new \`plugins/<name>/\` directory and the \`marketplace.json\` entry. Once it's reviewed and merged, your plugin is live in the square for everyone.`,
+First-party plugins that live in this repo are welcome too — fork \`probablybadmove/agora\`, add a \`plugins/<name>/\` directory plus a relative-\`source\` entry in \`.claude-plugin/marketplace.json\`, and open a PR.`,
 
   faq: [
     {

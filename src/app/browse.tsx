@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
+import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
 import { Page } from '@/components/page';
 import { PluginGrid } from '@/components/plugin-grid';
 import { SearchBar } from '@/components/search-bar';
@@ -14,6 +16,7 @@ import { useCatalog } from '@/hooks/use-catalog';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function BrowseScreen() {
+  const theme = useTheme();
   const { plugins } = useCatalog();
   const params = useLocalSearchParams<{ q?: string }>();
   const [query, setQuery] = useState(params.q ?? '');
@@ -32,7 +35,18 @@ export default function BrowseScreen() {
         description="Search every Claude Code plugin in Agora by name or category."
         path="/browse"
       />
-      <Section title="The catalog" rule={false}>
+      <Section
+        title="The catalog"
+        rule={false}
+        right={
+          <Button
+            label="Submit a plugin"
+            href="/submit"
+            variant="secondary"
+            size="sm"
+            iconRight={<Icon name="arrow-right" size={15} color={theme.text} />}
+          />
+        }>
         <SearchBar value={query} onChange={setQuery} />
 
         <ScrollView

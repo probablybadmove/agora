@@ -1,0 +1,77 @@
+name: Plugin submission
+description: Submit your Claude Code plugin to be listed in Agora. Your plugin stays in your own GitHub repo — we only add a referencing entry to marketplace.json.
+title: "[Plugin]: "
+labels: ["plugin-submission", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting to **Agora**! Your code stays in **your** repository — we add an entry to `.claude-plugin/marketplace.json` that points `source` at your GitHub repo. Make sure your repo has a valid `.claude-plugin/plugin.json` at its root before submitting.
+  - type: input
+    id: plugin-name
+    attributes:
+      label: Plugin name
+      description: The plugin identifier (kebab-case, no spaces). Must match the `name` in your plugin.json.
+      placeholder: my-plugin
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: GitHub repo (owner/repo)
+      description: The public GitHub repository that contains your plugin, in owner/repo format.
+      placeholder: your-username/your-plugin
+    validations:
+      required: true
+  - type: input
+    id: ref
+    attributes:
+      label: Git ref (optional)
+      description: A branch, tag, or release to pin to. Leave blank to track the repository's default branch.
+      placeholder: v1.0.0
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: One-line description
+      description: A short, clear description of what the plugin does (shown in the listing).
+      placeholder: Generate a Conventional Commits message from your staged diff.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Pick the single best-fit category.
+      options:
+        - Git
+        - Testing
+        - DevOps
+        - Data
+        - Utility
+        - Quality
+        - Project
+        - Meta
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: homepage
+    attributes:
+      label: Homepage URL
+      description: Docs, README, or landing page for the plugin.
+      placeholder: https://github.com/your-username/your-plugin#readme
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: My repository contains a valid `.claude-plugin/plugin.json` at its root.
+          required: true
+        - label: The repository is public and the owner/repo above is correct.
+          required: true
+        - label: This plugin is my own work (or I have the right to submit it) and is not malicious.
+          required: true

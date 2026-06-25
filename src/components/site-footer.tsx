@@ -30,6 +30,7 @@ export function SiteFooter() {
 
         <View style={styles.links}>
           <FooterLink href="/browse" label="Browse" />
+          <FooterLink href="/submit" label="Submit" />
           <FooterLink href="/docs" label="Docs" />
           <ExternalLink href={GITHUB_URL} asChild>
             <Pressable accessibilityRole="link" style={styles.ext}>
@@ -61,7 +62,7 @@ export function SiteFooter() {
 
 const YEAR = 2026;
 
-function FooterLink({ href, label }: { href: '/browse' | '/docs'; label: string }) {
+function FooterLink({ href, label }: { href: '/browse' | '/docs' | '/submit'; label: string }) {
   return (
     <Link href={href} asChild>
       <Pressable accessibilityRole="link">

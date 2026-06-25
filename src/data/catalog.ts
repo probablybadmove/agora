@@ -62,6 +62,7 @@ export function installCommand(p: Plugin): string {
 }
 
 export function sourceUrl(p: Plugin): string {
+  if (p.community && p.repo) return `https://github.com/${p.repo}`;
   return `https://github.com/${MARKETPLACE.repo}/tree/main/${p.source.replace('./', '')}`;
 }
 
@@ -88,6 +89,9 @@ type PluginRow = {
   author_url: string;
   source: string;
   featured: boolean | null;
+  community?: boolean | null;
+  repo?: string | null;
+  homepage?: string | null;
 };
 
 function rowToPlugin(r: PluginRow): Plugin {
@@ -108,6 +112,9 @@ function rowToPlugin(r: PluginRow): Plugin {
     author: { name: r.author_name, url: r.author_url },
     source: r.source,
     featured: Boolean(r.featured),
+    community: Boolean(r.community),
+    repo: r.repo ?? undefined,
+    homepage: r.homepage ?? undefined,
   };
 }
 

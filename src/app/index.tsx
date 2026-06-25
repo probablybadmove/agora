@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { type LayoutChangeEvent, StyleSheet, useWindowDimensions, View } from 'react-native';
 
+import { AddToClaude } from '@/components/add-to-claude';
 import { Button } from '@/components/button';
 import { CategoryTile } from '@/components/category-tile';
 import { CodeBlock } from '@/components/code-block';
@@ -46,12 +47,7 @@ export default function HomeScreen() {
             {COPY.heroSubhead}
           </ThemedText>
           <View style={styles.ctaRow}>
-            <Button
-              label="Add to Claude Code"
-              href="/docs"
-              size="lg"
-              iconRight={<Icon name="arrow-right" size={17} color={theme.background} />}
-            />
+            <AddToClaude size="lg" />
             <Button label="Browse plugins" href="/browse" variant="secondary" size="lg" />
           </View>
           <ThemedText type="small" themeColor="textSecondary">
@@ -99,15 +95,15 @@ export default function HomeScreen() {
 
       {/* Contribute */}
       <Section
-        title="An open square"
-        description="Agora takes pull requests. Add a plugin directory, register it in the manifest, and it's on the shelf for everyone.">
+        title="Bring your own plugin"
+        description="Agora lists plugins from anyone's repo. Keep your plugin in your own GitHub repo, open a submission, and once it's approved it's installable for everyone — your code never moves.">
         <View style={styles.contribute}>
           <Button
-            label="Read the publish guide"
-            href="/docs"
-            variant="secondary"
-            iconRight={<Icon name="arrow-right" size={16} color={theme.text} />}
+            label="Submit a plugin"
+            href="/submit"
+            iconRight={<Icon name="arrow-right" size={16} color={theme.background} />}
           />
+          <Button label="How it works" href="/docs" variant="secondary" />
         </View>
       </Section>
     </Page>
@@ -168,5 +164,5 @@ const styles = StyleSheet.create({
   step: { gap: 6 },
   stepLabel: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   catGrid: { flexDirection: 'row', flexWrap: 'wrap', width: '100%' },
-  contribute: { flexDirection: 'row' },
+  contribute: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
 });

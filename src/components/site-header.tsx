@@ -2,8 +2,8 @@ import { Link, usePathname } from 'expo-router';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { AddToClaude } from '@/components/add-to-claude';
 import { AgoraMark } from '@/components/agora-mark';
-import { Button } from '@/components/button';
 import { ExternalLink } from '@/components/external-link';
 import { Icon } from '@/components/icon';
 import { ThemedText } from '@/components/themed-text';
@@ -49,20 +49,21 @@ export function SiteHeader() {
 
         <View style={styles.nav}>
           <NavLink href="/browse" label="Browse" />
+          {!compact ? <NavLink href="/submit" label="Submit" /> : null}
           <NavLink href="/docs" label="Docs" />
           <ExternalLink href={GITHUB_URL} asChild>
             <Pressable accessibilityRole="link" style={styles.iconLink} aria-label="GitHub">
               <Icon name="github" size={19} color={theme.textSecondary} />
             </Pressable>
           </ExternalLink>
-          <Button label={compact ? 'Add' : 'Add to Claude Code'} href="/docs" size="sm" />
+          <AddToClaude size="sm" compact={compact} />
         </View>
       </View>
     </View>
   );
 }
 
-function NavLink({ href, label }: { href: '/browse' | '/docs'; label: string }) {
+function NavLink({ href, label }: { href: '/browse' | '/docs' | '/submit'; label: string }) {
   const theme = useTheme();
   const pathname = usePathname();
   const active = pathname.startsWith(href);

@@ -27,7 +27,10 @@ export function PluginCard({ plugin, category }: { plugin: Plugin; category?: Ca
               <ThemedText type="eyebrow" themeColor="textSecondary">
                 {category?.name ?? plugin.category}
               </ThemedText>
-              <Pill label={plugin.kind === 'agent' ? 'agent' : 'skill'} mono />
+              <View style={styles.tags}>
+                {plugin.community ? <Pill label="community" tone="accent" /> : null}
+                <Pill label={plugin.kind === 'agent' ? 'agent' : 'skill'} mono />
+              </View>
             </View>
 
             <View style={styles.body}>
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
     transitionDuration: '140ms',
   } as object,
   top: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  tags: { flexDirection: 'row', alignItems: 'center', gap: Spacing.one },
   body: { gap: 6, flex: 1 },
   desc: {},
   footer: {

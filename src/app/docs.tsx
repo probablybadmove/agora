@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
+import { Button } from '@/components/button';
 import { Markdown } from '@/components/markdown';
 import { Page } from '@/components/page';
 import { Section } from '@/components/section';
@@ -21,8 +22,11 @@ export default function DocsScreen() {
         <Markdown content={stripLeadingHeading(COPY.addToClaudeMarkdown)} />
       </Section>
 
-      <Section title="Publish your own plugin">
+      <Section title="List your plugin">
         <Markdown content={stripLeadingHeading(COPY.publishGuideMarkdown)} />
+        <View style={styles.docCta}>
+          <Button label="Submit a plugin" href="/submit" />
+        </View>
       </Section>
 
       <Section title="About Agora">
@@ -61,6 +65,7 @@ function stripLeadingHeading(md: string): string {
 }
 
 const styles = StyleSheet.create({
+  docCta: { flexDirection: 'row', marginTop: Spacing.one },
   faq: { gap: Spacing.three, width: '100%' },
   card: {
     borderWidth: StyleSheet.hairlineWidth * 2,

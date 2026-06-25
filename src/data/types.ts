@@ -20,9 +20,16 @@ export type Plugin = {
   version: string;
   license: string;
   author: { name: string; url: string };
-  /** Relative source path inside the marketplace repo, e.g. "./plugins/pr-author". */
+  /** Relative source path inside the marketplace repo, e.g. "./plugins/pr-author".
+   *  For community plugins this is unused — `repo` + `community` drive a github source. */
   source: string;
   featured: boolean;
+  /** Community plugins live in the submitter's own repo, referenced by a github source. */
+  community?: boolean;
+  /** owner/repo of a community plugin's GitHub repository. */
+  repo?: string;
+  /** Optional homepage / docs URL. */
+  homepage?: string;
 };
 
 export type Category = {
